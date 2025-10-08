@@ -1,0 +1,18 @@
+workflows:
+  build-ios:
+    name: Build iOS .ipa
+    environment:
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Clean project
+        script: |
+          cd flutter_application_1
+          flutter clean
+          flutter pub get
+      - name: Build iOS unsigned IPA
+        script: |
+          cd flutter_application_1
+          flutter build ipa --release --no-codesign
+    artifacts:
+      - flutter_application_1/build/ios/ipa/*.ipa
